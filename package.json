@@ -1,0 +1,11 @@
+{
+  "name": "appnod",
+  "version": "1.0.0",
+  "description": "App Actividad 2 Ingeniería y Desarrollo en la Web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Diego Jacome",
+  "license": "ISC"
+}
