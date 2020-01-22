@@ -1,32 +1,12 @@
-const mongoose = require('mongoose');
+module.exports = {
+        Estudiante : function (nombres, apellidos, correo, direccion, telefono, fechaNacimiento, avatar  ) { 
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.avatar = avatar;
+    }   
+};
 
-const EstudianteSchema = new mongoose.Schema({
-    nombres: {
-        type: String,
-        required: true,
-    },
-    apellidos: {
-        type: String,
-        required: true,
-    },
-    correo: {
-        type: String,
-        required: true,
-    },
-    direccion: {
-        type: String,
-        required: true,
-    },    
-    telefono: {
-        type: String
-    },
-    fechaNacimiento: {
-        type: Date,
-        required: true,
-    },
-    avatar: {
-        type: String
-    }
-});
-
-mongoose.model('Estudiante', EstudianteSchema);
