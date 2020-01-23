@@ -1,0 +1,57 @@
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  line-height: 2;
+}
+
+.centrar-texto {
+  text-align: center;
+}
+.negrilla{
+  font-weight: bold;
+}
+
+
+.avatar {
+  width: 128px;
+  height: 128px;
+}
+.icono {
+  color: #01356b;
+  text-shadow: 1px 1px 1px #ccc;
+  font-size: 2rem;
+  margin-left: 0.8rem;
+}
+
+footer {
+  width: 100%;  
+  position: fixed;
+  text-align: center;
+  background: #353A3F;
+  margin-bottom: 0;
+  color: white;
+  bottom: 0px;
+}
+
+address {
+  margin-bottom: 0;
+}
+
+
+.icono-error {
+  color: #c50909;
+  text-shadow: 1px 1px 1px #ccc;
+  font-size: 8.5rem;
+  margin-left: 0.8rem;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}

@@ -1,0 +1,49 @@
+{% extends 'template.html' %} 
+{% block content %}
+
+<div class="container">
+  <h1>Crear Curso</h1>
+
+  <form method="post" action="/curso">
+
+    <div class="form-group">
+            <label for="titulo">Título: <span class="text-danger">*</span></label>
+            <input type="text" id="titulo" name="titulo" class="form-control"
+                placeholder="Título del Curso" required>
+                <div class="invalid-feedback">
+                    Por favor ingresa el título del Curso.
+                </div>
+    </div>
+
+    <div class="form-group">
+            <label for="descripcion">Descripción: <span class="text-danger">*</span></label>
+            <input type="text" id="descripcion" name="descripcion" class="form-control"
+                placeholder="Descripción del Curso" required>
+                <div class="invalid-feedback">
+                    Por favor ingresa la Descripción del Curso.
+                </div>
+    </div>
+
+    <div class="form-group">
+            <label for="urlImagen">Url Imágen: <span class="text-danger">*</span></label>
+            <input type="text" id="urlImagen" name="urlImagen" class="form-control"
+                placeholder="Url Imágen del Curso" required>
+                <div class="invalid-feedback">
+                    Por favor ingresa la Url Imágen del Curso.
+                </div>
+    </div>
+
+    <div class="form-group">
+            <label for="horas">Horas: <span class="text-danger">*</span></label>
+            <input type="number" id="horas" name="horas" class="form-control"
+                required>
+                <div class="invalid-feedback">
+                    Por favor ingresa el Número de Horas del Curso.
+                </div>
+    </div>
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+</form>
+</div>
+
+{% endblock %}

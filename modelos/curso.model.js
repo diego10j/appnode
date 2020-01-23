@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const CursoSchema = new mongoose.Schema({
+
     titulo: {
         type: String,
         required: true,
@@ -13,7 +14,7 @@ const CursoSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    precio: {
+    horas: {
         type: Number,
         required: true
     },
