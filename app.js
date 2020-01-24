@@ -24,17 +24,46 @@ app.get('/', function (req, res) {
 /**
  * Abre pagina curso.html para crear un nuevo Curso
  */
-app.get('/nuevoCurso', function (req, res) {
+app.get('/curso', function (req, res) {
     var respuesta = swig.renderFile("vistas/curso.html",
         {
-            titulo: "Crear Curso"  
+            titulo: "Crear Curso"
         }
     );
     res.send(respuesta);
 });
 
+
+/**
+ * Abre pagina curso.html para crear modificar un Curso
+ */
+app.get('/curso/:id', function (req, res) {
+    // Abrir el cliente
+    MongoClient.connect('mongodb+srv://diego:oGAjHhVk2sXthtLq@cluster0-eikjc.mongodb.net/appnode',
+        function (err, db) {
+            if (err) {
+                var respuesta = swig.renderFile('vistas/error.html', {
+                    mensaje: "Ha ocurrido un problema al conectar a la base de datos"
+                });
+                res.send(respuesta);
+            }
+            var collection = db.db("appnode").collection('Curso');
+            var idCurso = require('mongodb').ObjectID(req.params.id);
+            collection.find({ _id: idCurso }).toArray(function (err, cursos) {
+                db.close();
+                var respuesta = swig.renderFile('vistas/curso.html', {
+                    titulo: "Modificar Curso",
+                    curso: cursos[0]
+                });
+
+                res.send(respuesta);
+            });
+
+        });
+})
+
 app.get("/cursos", function (req, res) {
-    // Tomar datos del modelo
+    // Abrir el cliente
     MongoClient.connect('mongodb+srv://diego:oGAjHhVk2sXthtLq@cluster0-eikjc.mongodb.net/appnode',
         function (err, db) {
             if (err) {
@@ -54,11 +83,11 @@ app.get("/cursos", function (req, res) {
             })
         })
 })
- 
+
 /**
  * Insertar Curso 
  */
-app.post('/curso', function (req, res) {
+app.post('/insertarCurso', function (req, res) {
     var curso = {
         titulo: req.body.titulo,
         descripcion: req.body.descripcion,
@@ -92,50 +121,52 @@ app.post('/curso', function (req, res) {
 /**
  * Modificar Curso
  */
-app.put('/curso/:id', function (req, res) {
+app.post('/modificarCurso/:id', function (req, res) {
+    var curso = {
+        titulo: req.body.titulo,
+        descripcion: req.body.descripcion,
+        urlImagen: req.body.urlImagen,
+        horas: req.body.horas,
+    }
 
     MongoClient.connect('mongodb+srv://diego:oGAjHhVk2sXthtLq@cluster0-eikjc.mongodb.net/appnode',
         function (err, db) {
-            if (err) {
-                res.send("Error al conectar");
-            }
-            var collection = db.db("appnode").collection('Curso');
-
-            var id = require('mongodb').ObjectID(req.params.id);
-
-            collection.update({ "_id": id }, { $set: { "titulo": "titulo cambiado" } }, function (err, result) {
-                res.redirect("/anuncios");
-            })
-
-        })
-
-
-    let id = req.params.id;
-    res.json({
-        id
-    });
-}); 
-
-/**
- * Eliminar un curso
-*/
-app.get('/eliminarCurso/:id', function (req, res) {
-        // Abrir el cliente 
-        MongoClient.connect('mongodb+srv://diego:oGAjHhVk2sXthtLq@cluster0-eikjc.mongodb.net/appnode',
-        function(err, db) {
             if (err) {
                 var respuesta = swig.renderFile('vistas/error.html', {
                     mensaje: "Ha ocurrido un problema al conectar a la base de datos"
                 });
                 res.send(respuesta);
-            }        
-            var collection = db.db("appnode").collection('Curso');            
+            }
+            var collection = db.db("appnode").collection('Curso');
+            var id = require('mongodb').ObjectID(req.params.id);
+            collection.update({ "_id": id }, { $set: curso }, function (err, result) {
+                res.redirect("/cursos");
+            })
+
+        })
+
+});
+
+/**
+ * Eliminar un curso
+*/
+app.get('/eliminarCurso/:id', function (req, res) {
+    // Abrir el cliente 
+    MongoClient.connect('mongodb+srv://diego:oGAjHhVk2sXthtLq@cluster0-eikjc.mongodb.net/appnode',
+        function (err, db) {
+            if (err) {
+                var respuesta = swig.renderFile('vistas/error.html', {
+                    mensaje: "Ha ocurrido un problema al conectar a la base de datos"
+                });
+                res.send(respuesta);
+            }
+            var collection = db.db("appnode").collection('Curso');
             // Transformar a Mongo ObjectID
-            var id = require('mongodb').ObjectID(req.params.id);     
-            collection.remove({ _id : id }, function (err, result) {
+            var id = require('mongodb').ObjectID(req.params.id);
+            collection.remove({ _id: id }, function (err, result) {
                 if (err) {
                     var respuesta = swig.renderFile('vistas/error.html', {
-                        mensaje : "Problema al Eliminar el Curso"
+                        mensaje: "Problema al Eliminar el Curso"
                     });
                     res.send(respuesta);
                 } else {
@@ -143,8 +174,8 @@ app.get('/eliminarCurso/:id', function (req, res) {
                 }
                 db.close();
             });
-          
-        }); 
+
+        });
 
 });
 

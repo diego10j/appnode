@@ -14,10 +14,9 @@ body {
 .centrar-texto {
   text-align: center;
 }
-.negrilla{
+.negrilla {
   font-weight: bold;
 }
-
 
 .avatar {
   width: 128px;
@@ -31,10 +30,10 @@ body {
 }
 
 footer {
-  width: 100%;  
+  width: 100%;
   position: fixed;
   text-align: center;
-  background: #353A3F;
+  background: #353a3f;
   margin-bottom: 0;
   color: white;
   bottom: 0px;
@@ -43,7 +42,6 @@ footer {
 address {
   margin-bottom: 0;
 }
-
 
 .icono-error {
   color: #c50909;
@@ -54,4 +52,9 @@ address {
 
 .table > tbody > tr > td {
   vertical-align: middle;
+}
+
+.derecha {
+  float: right;
+  padding-bottom: 10px;
 }
