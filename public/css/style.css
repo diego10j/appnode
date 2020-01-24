@@ -30,13 +30,12 @@ body {
 }
 
 footer {
+  margin-top: 50px;
   width: 100%;
-  position: fixed;
   text-align: center;
   background: #353a3f;
   margin-bottom: 0;
   color: white;
-  bottom: 0px;
 }
 
 address {
@@ -47,7 +46,6 @@ address {
   color: #c50909;
   text-shadow: 1px 1px 1px #ccc;
   font-size: 8.5rem;
-  margin-left: 0.8rem;
 }
 
 .table > tbody > tr > td {
@@ -57,4 +55,10 @@ address {
 .derecha {
   float: right;
   padding-bottom: 10px;
+}
+
+
+.icono-github {
+  color: #1f1e1e;
+  font-size: 1.8rem;
 }

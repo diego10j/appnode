@@ -7,12 +7,13 @@
     <form method="post" action="/modificarCurso/{{ curso._id.toString()}}">
         <div class="form-group">
             <label for="titulo">Título: <span class="text-danger">*</span></label>
-            <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Título del Curso" value="{{ curso.titulo }}" required>
+            <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Título del Curso"
+                value="{{ curso.titulo }}" required>
         </div>
         <div class="form-group">
             <label for="descripcion">Descripción: <span class="text-danger">*</span></label>
             <input type="text" id="descripcion" name="descripcion" class="form-control"
-                placeholder="Descripción del Curso" required value="{{ curso.descripcion }}" >
+                placeholder="Descripción del Curso" required value="{{ curso.descripcion }}">
         </div>
         <div class="form-group">
             <label for="urlImagen">Url Imágen: <span class="text-danger">*</span></label>

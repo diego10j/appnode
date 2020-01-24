@@ -35,6 +35,17 @@ app.get('/curso', function (req, res) {
 
 
 /**
+ * Abre pagina estudiante.html
+ */
+app.get('/inscripcion', function (req, res) {
+    var respuesta = swig.renderFile("vistas/estudiante.html",
+        {}
+    );
+    res.send(respuesta);
+});
+
+
+/**
  * Abre pagina curso.html para crear modificar un Curso
  */
 app.get('/curso/:id', function (req, res) {
@@ -62,6 +73,9 @@ app.get('/curso/:id', function (req, res) {
         });
 })
 
+/**
+ * Obtener el listado de cursos
+ */
 app.get("/cursos", function (req, res) {
     // Abrir el cliente
     MongoClient.connect('mongodb+srv://diego:oGAjHhVk2sXthtLq@cluster0-eikjc.mongodb.net/appnode',
@@ -179,6 +193,45 @@ app.get('/eliminarCurso/:id', function (req, res) {
 
 });
 
+
+/**
+ * Insertar Estudiante 
+ */
+app.post('/insertarEstudiante', function (req, res) {
+    var estudiante = {
+        nombres: req.body.nombres,
+        apellidos: req.body.apellidos,
+        correo: req.body.correo,
+        fechaNacimiento: req.body.fechaNacimiento,
+        telefono: req.body.telefono,
+        pais: req.body.pais,
+        provinicia: req.body.provinicia,
+        direccion: req.body.direccion,
+        avatar: req.body.avatar,
+        fechaCrea: new Date()
+    }
+    MongoClient.connect('mongodb+srv://diego:oGAjHhVk2sXthtLq@cluster0-eikjc.mongodb.net/appnode',
+        function (err, db) {
+            if (err) {
+                var respuesta = swig.renderFile('vistas/error.html', {
+                    mensaje: "Ha ocurrido un problema al conectar a la base de datos"
+                });
+                res.send(respuesta);
+            }
+            var collection = db.db("appnode").collection('Estudiante');
+            collection.insert(estudiante, function (err, result) {
+                if (err) {
+                    var respuesta = swig.renderFile('vistas/error.html', {
+                        mensaje: "Ha ocurrido un problema al guardar el Estudiante"
+                    });
+                    res.send(respuesta);
+                }
+                // Cerrar el cliente
+                db.close();
+                res.redirect("/");
+            });
+        });
+});
 
 
 app.listen(3000, function () {

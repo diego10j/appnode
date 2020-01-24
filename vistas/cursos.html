@@ -1,15 +1,16 @@
-{% extends 'template.html' %} 
+{% extends 'template.html' %}
 {% block content %}
 <br>
 <div class="container">
   <h1> Cursos</h1>
-  <div class="derecha"> <a href="/curso" class="btn btn-success" role="button"><i class="fas fa-plus"></i> Insertar</a> </div>
+  <div class="derecha"> <a href="/curso" class="btn btn-success" role="button"><i class="fas fa-plus"></i> Insertar</a>
+  </div>
   <table class="table">
     <thead class="thead-light">
       <tr>
         <th scope="col" style="width: 20%">IMAGEN</th>
         <th scope="col" style="width: 20%;">TITULO</th>
-        <th scope="col" style="width: 40%;">DESCRIPCION</th>        
+        <th scope="col" style="width: 40%;">DESCRIPCION</th>
         <th scope="col" style="width: 5%;">HORAS</th>
         <th scope="col" style="width: 20%;"></th>
       </tr>
@@ -19,13 +20,14 @@
       <tr>
         <td> <img src="{{ curso.urlImagen}}" height="96"> </td>
         <td>{{ curso.titulo}}</td>
-        <td>{{ curso.descripcion}}</td>        
+        <td>{{ curso.descripcion}}</td>
         <td>{{ curso.horas}}</td>
-        <td> <a href="/curso/{{ curso._id.toString()}}" class="btn btn-primary" role="button"><i class="far fa-edit"></i> </a>   <a href="/eliminarCurso/{{ curso._id.toString()}}" class="btn btn-danger" role="button"><i class="fas fa-trash-alt"></i> </a> </td>
+        <td> <a href="/curso/{{ curso._id.toString()}}" class="btn btn-primary" role="button"><i
+              class="far fa-edit"></i> </a> <a href="/eliminarCurso/{{ curso._id.toString()}}" class="btn btn-danger"
+            role="button"><i class="fas fa-trash-alt"></i> </a> </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
-
 {% endblock %}
