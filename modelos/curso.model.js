@@ -1,27 +1,10 @@
-const mongoose = require('mongoose');
 
-const CursoSchema = new mongoose.Schema({
-
-    titulo: {
-        type: String,
-        required: true,
-    },
-    descripcion: {
-        type: String,
-        required: true,
-    },
-    urlImagen: {
-        type: String,
-        required: true,
-    },
-    horas: {
-        type: Number,
-        required: true
-    },
-    fechaCrea: {
-        type: Date,
-        default: Date.now,
-    }
-});
-
-mongoose.model('Curso', CursoSchema);
+module.exports = {
+    Curso : function (titulo, descripcion, urlImagen, horas  ) { 
+    this.titulo = titulo;
+    this.descripcion = descripcion;
+    this.urlImagen = urlImagen;
+    this.horas = horas;
+    this.fechaCrea = new Date();
+}   
+};
