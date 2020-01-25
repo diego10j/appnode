@@ -3,6 +3,7 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const swig = require('swig');
+const port = process.env.PORT || 3000;
 
 //Acceso a contenido carpeta public
 app.use(express.static('public'));
@@ -234,8 +235,8 @@ app.post('/insertarEstudiante', function (req, res) {
 });
 
 
-app.listen(3000, function () {
-    console.log("Escuchando puerto 3000")
+app.listen(port, function () {
+    console.log(`Escuchando peticiones en el puerto ${ port }`);
 });
 
 

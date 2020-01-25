@@ -4,6 +4,8 @@
   "description": "App Actividad 2 Ingeniería y Desarrollo en la Web",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "nodemon": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Diego Jacome",
