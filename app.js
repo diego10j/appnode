@@ -229,14 +229,39 @@ app.post('/insertarEstudiante', function (req, res) {
                 }
                 // Cerrar el cliente
                 db.close();
-                res.redirect("/");
+                res.redirect("/estudiantes");
             });
         });
 });
 
+/**
+ * Obtener el listado de estudiantes
+ */
+app.get("/estudiantes", function (req, res) {
+    // Abrir el cliente
+    MongoClient.connect('mongodb+srv://diego:oGAjHhVk2sXthtLq@cluster0-eikjc.mongodb.net/appnode',
+        function (err, db) {
+            if (err) {
+                var respuesta = swig.renderFile('vistas/error.html', {
+                    mensaje: "Ha ocurrido un problema al conectar a la base de datos"
+                });
+                res.send(respuesta);
+            }
+            var collection = db.db("appnode").collection('Estudiante');
+            collection.find({}).toArray(function (err, estudiantes) {
+                var respuesta = swig.renderFile("vistas/estudiantes.html",
+                    {
+                        estudiantes: estudiantes
+                    }
+                );
+                res.send(respuesta);
+            })
+        })
+})
+
 
 app.listen(port, function () {
-    console.log(`Escuchando peticiones en el puerto ${ port }`);
+    console.log(`Escuchando peticiones en el puerto ${port}`);
 });
 
 
